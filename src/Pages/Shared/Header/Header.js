@@ -1,17 +1,23 @@
 import React, { useContext } from 'react';
-import { Image } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { FaUser, FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
-  const newUser = useContext(AuthContext)
-  const {user} = newUser;
-  console.log(user);
+  const {user, logOut} = useContext(AuthContext)
+
+  const handleSignOut = () =>{
+    logOut()
+    .then(res=>{
+      console.log(res.user);
+    }).catch(err =>console.error(err))
+  }
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className='mb-3'  sticky="top">
       <Container>
@@ -35,12 +41,25 @@ const Header = () => {
           </Nav>
           <Nav>
             <Nav.Link href="#deets">
-            <Image
-                    src={user?.photoURL}
-                    style={{height: "40px"}}
-                    roundedCircle
-                >
-                </Image>
+            {
+              user?.uid ?
+              <>
+               <Button onClick={handleSignOut} variant="outline-dark" className='me-2'>Sign Out</Button>
+              <span><Image
+              src={user?.photoURL}
+              style={{height: "40px"}}
+              roundedCircle
+          >
+          </Image></span> 
+          
+              </>:
+            <p>
+              <Button variant='outline-dark' className='me-2'><Link to='/login'>Login</Link></Button>
+              <Button variant='outline-dark' className='me-2'> <Link to='/signup'>Sign Up</Link></Button>
+              <FaUserAlt></FaUserAlt>
+
+            </p>
+            }
             </Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
             {user?.displayName}
