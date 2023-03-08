@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
-import Lodaer from '../../Shared/Lodaer/Lodaer';
+
 
 const Login = () => {
-    const {logIn,loader} = useContext(AuthContext);
+    const {logIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
