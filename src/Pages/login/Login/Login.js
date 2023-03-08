@@ -1,25 +1,32 @@
 import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
+import Lodaer from '../../Shared/Lodaer/Lodaer';
 
 const Login = () => {
-    const {logIn} = useContext(AuthContext);
-
+    const {logIn,loader} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     const handleLogIn = (e) =>{
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
         console.log(email,password);
-        logIn(email,password)
+        
+            logIn(email,password)
         .then(res=>{
             console.log(res.user);
+            navigate(from, { replace: true });
         })
         .catch(
             err => console.error(err)
         )
         form.reset()
+        
     }
     return (
         <Form onSubmit={handleLogIn}>
