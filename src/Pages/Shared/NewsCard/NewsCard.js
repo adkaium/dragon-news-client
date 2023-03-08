@@ -2,11 +2,11 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import Image from 'react-bootstrap/Image'
-import { FaRegBookmark, FaShareAlt } from 'react-icons/fa';
+import { FaEye, FaRegBookmark, FaShareAlt, FaStar } from 'react-icons/fa';
 
 const NewsCard = ({news}) => {
     console.log(news);
-    const {title,author,image_url,total_view,details,_id,
+    const {title,author,image_url,total_view,details,_id,rating
     } = news
     return (
         <Card className='mt-3'>
@@ -14,15 +14,15 @@ const NewsCard = ({news}) => {
         <div className='d-flex align-items-center'>
             <div className='me-2'>
                 <Image
-                    src={author.img}
+                    src={author?.img}
                     style={{height: "60px"}}
                     roundedCircle
                 >
                 </Image>
             </div>
             <div>
-                <p>{author.name}</p>
-                <small>{author.published_date}</small>
+                <p className='mb-0'>{author?.name}</p>
+                <small>{author?.published_date}</small>
             </div>
         </div>
         <div>
@@ -41,7 +41,16 @@ const NewsCard = ({news}) => {
           }
         </Card.Text>
       </Card.Body>
-      <Card.Footer className="text-muted">{total_view}</Card.Footer>
+      <Card.Footer className="d-flex justify-content-between aling-items-center">
+        <div>
+          <FaStar className='text-warning me-2'></FaStar>
+          <span>{rating.number}</span>
+        </div>
+        <div>
+          <FaEye className='me-2'></FaEye>
+          <span>{total_view}</span>
+        </div>
+      </Card.Footer>
     </Card>
     );
 };
