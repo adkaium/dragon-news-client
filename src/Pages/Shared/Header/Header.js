@@ -10,8 +10,7 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
   const newUser = useContext(AuthContext)
-  const {user,photoURL
-  } = newUser;
+  const {user} = newUser;
   console.log(user);
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className='mb-3'  sticky="top">
@@ -38,7 +37,7 @@ const Header = () => {
             <Nav.Link href="#deets">
             <Image
                     src={user?.photoURL}
-                    style={{height: "60px"}}
+                    style={{height: "40px"}}
                     roundedCircle
                 >
                 </Image>
