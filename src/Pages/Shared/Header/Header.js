@@ -8,7 +8,7 @@ import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className='mb-3'>
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light" className='mb-3'  sticky="top">
       <Container>
         <Navbar.Brand><Link to='/'>Dragon News</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
