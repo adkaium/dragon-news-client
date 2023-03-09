@@ -1,21 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 
 const SignUp = () => {
-    const {creatNewUser} = useContext(AuthContext);
+    const {creatNewUser,updateUserProfile} = useContext(AuthContext);
+    const [accepted,setAccepted] = useState(false)
 
     const handleSubmit = (e) =>{
         e.preventDefault()
         const form = e.target;
         const name= form.name.value;
-        const photoUrl= form.photoURL.value;
+        const photoURL= form.photoURL.value;
         const email = form.email.value;
         const confrim = form.confrim.value;
         const password = form.password.value;
-        console.log(name,photoUrl,email,confrim,password);
+        console.log(name,photoURL,email,confrim,password);
         if(confrim === password){
             creatNewUser(email,password)
         .then(res =>{
@@ -26,6 +28,20 @@ const SignUp = () => {
             console.error('password not match')
         }
         form.reset();
+        updateUser(name,photoURL)
+    }
+    const handelChecked =(e)=>{
+      setAccepted(e.target.checked);
+    }
+
+    const updateUser = (name, photoURL) =>{
+      const  profile ={
+        displayName : name,
+        photoURL: photoURL
+      }
+      updateUserProfile(profile)
+      .then(()=>{})
+      .catch(error =>console.error(error))
     }
     return (
         <Form onSubmit={handleSubmit}>
@@ -53,8 +69,21 @@ const SignUp = () => {
         <Form.Label>Password</Form.Label>
         <Form.Control name='password' type="password" placeholder="Password" />
       </Form.Group>
+      <Form.Group 
+      className="mb-3" 
+      controlId="formBasicCheckbox">
+        <Form.Check 
+        type="checkbox" 
+        label={
+          <>
+            <p>Accepted <Link to='/terms'>All Trems And Conditions</Link></p>
+          </>
+        } 
+        onClick={handelChecked}
+        />
+      </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" disabled={!accepted}>
         Submit
       </Button><br/>
 

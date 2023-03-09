@@ -7,7 +7,7 @@ import BrandCarusel from '../BrandCarusel/BrandCarusel';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const RightSideNav = () => {
-    const {user, googleSignIn} = useContext(AuthContext);
+    const { googleSignIn} = useContext(AuthContext);
     const handleGoogleSignIn = () =>{
         googleSignIn()
         .then(res =>{

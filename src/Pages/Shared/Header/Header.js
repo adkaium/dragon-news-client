@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { FaUser, FaUserAlt } from 'react-icons/fa';
+import {  FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
@@ -44,7 +44,7 @@ const Header = () => {
             {
               user?.uid ?
               <>
-               <Button onClick={handleSignOut} variant="outline-dark" className='me-2'>Sign Out</Button>
+               <Button onClick={handleSignOut} variant="outline-dark" className='me-2'><Link to='/'>Sign Out</Link></Button>
               <span><Image
               src={user?.photoURL}
               style={{height: "40px"}}

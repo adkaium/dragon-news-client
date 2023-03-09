@@ -21,6 +21,10 @@ const AuthProvider = ({children}) => {
         return createUserWithEmailAndPassword(auth, email,password)
     }
 
+    const updateUserProfile = (profile) =>{
+        return updateUserProfile(auth.currentUser,profile)
+    }
+
     const logIn = (email, password) =>{
         setLoader(true)
         return signInWithEmailAndPassword(auth,email,password)
@@ -39,7 +43,15 @@ const AuthProvider = ({children}) => {
             unsubscribe()
         }
     },[])
-    const authInfo = {user,loader, googleSignIn, creatNewUser,logIn,logOut}
+    const authInfo = {
+        user,
+        loader, 
+        googleSignIn, 
+        creatNewUser,
+        updateUserProfile,
+        logIn,
+        logOut
+    }
     return (
         <AuthContext.Provider value={authInfo}>
             {children}
